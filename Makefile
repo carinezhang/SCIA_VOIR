@@ -3,7 +3,7 @@ CFLAGS = -std=c++14 -pedantic  `pkg-config opencv --cflags --libs`
 BIN = exo
 # g++ -o test_1 exo2.cc `pkg-config opencv --cflags --libs`
 
-SRC = test.cpp
+SRC = test_cpp.cpp
 
 OBJ = $(SRC:.c=.o)
 
