@@ -54,15 +54,15 @@ def feature_matching(img1, img2):
 
 #images = glob.glob('bd_projet_scia/mires/*')
 images = glob.glob('./*.jpg')
-images = glob.glob('./*.JPG')
+images += glob.glob('./*.JPG')
 images += glob.glob('./*.png')
 images += glob.glob('./*.PNG')
 for name in sys.argv[1:]:
     try:
-        images += glob.glob(name + '*.jpg')
-        images += glob.glob(name + '*.JPG')
-        images += glob.glob(name + '*.png')
-        images += glob.glob(name + '*.PNG')
+        images += glob.glob(name + '/*.jpg')
+        images += glob.glob(name + '/*.JPG')
+        images += glob.glob(name + '/*.png')
+        images += glob.glob(name + '/*.PNG')
     except:
         print("ERROR wrong folder name")
         break

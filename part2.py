@@ -3,6 +3,8 @@ import glob
 import numpy as np
 import imutils
 import json
+import sys
+
 
 #import matplotlib
 #matplotlib.use("TkAgg")
@@ -82,7 +84,21 @@ def feature_matching(img1, img2):
 
 
 
-images = glob.glob('bd_projet_scia/test/*')
+#images = glob.glob('bd_projet_scia/test/*')
+images = glob.glob('./*.jpg')
+images += glob.glob('./*.JPG')
+images += glob.glob('./*.png')
+images += glob.glob('./*.PNG')
+for name in sys.argv[1:]:
+    try:
+        images += glob.glob(name + '/*.jpg')
+        images += glob.glob(name + '/*.JPG')
+        images += glob.glob(name + '/*.png')
+        images += glob.glob(name + '/*.PNG')
+    except:
+        print("ERROR wrong folder name")
+        break
+
 img_mire = cv2.imread('data/mire.png',0)    
 img_damier = cv2.imread('data/damier.png',0)    
 
@@ -99,8 +115,8 @@ for fname in images:
         dim = (width, height)
         # resize image
         resized = cv2.resize(raw_image, dim, interpolation = cv2.INTER_AREA)
-        #cv2.imshow('a', resized)
-        #cv2.waitKey(0)
+        cv2.imshow('a', resized)
+        cv2.waitKey(0)
 
         gray = cv2.cvtColor(resized,cv2.COLOR_BGR2GRAY)
 
