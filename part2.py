@@ -11,6 +11,8 @@ import sys
 #from matplotlib import pyplot as plt
 
 
+def original_value(box):
+        return [[int((x * 10)/3), int((y* 10)/3)]  for (x,y) in box]
 
 def baricenter(rect_detected):
         pass
@@ -209,7 +211,7 @@ for fname in images:
                                 detected = True
                                 #detection['mire'] = mire_number(rect_detected)
                         if detected:
-                                detection['corners'] = box.tolist()
+                                detection['corners'] = original_value(box.tolist())
                                 #detection['center'] = baricenter(rect_detected)
                                 detected_list.append(detection)
                         
