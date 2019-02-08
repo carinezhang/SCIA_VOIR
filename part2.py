@@ -14,8 +14,24 @@ import sys
 def original_value(box):
         return [[int((x * 10)/3), int((y* 10)/3)]  for (x,y) in box]
 
-def baricenter(rect_detected):
+def centroid(rect_detected, corner):
         pass
+#         # convert image to grayscale image
+#         gray_image = cv2.cvtColor(rect_detected, cv2.COLOR_BGR2GRAY)
+ 
+# # convert the grayscale image to binary image
+#         ret,thresh = cv2.threshold(gray_image,127,255,0)
+        
+#         # calculate moments of binary image
+#         M = cv2.moments(thresh)
+        
+#         # calculate x,y coordinate of center
+#         cX = int(M["m10"] / M["m00"])
+#         cY = int(M["m01"] / M["m00"])
+
+#         #get rotation
+#         return [cX,cY]
+
 def mire_number(rect_detected):
         pass
 
@@ -117,8 +133,8 @@ for fname in images:
         dim = (width, height)
         # resize image
         resized = cv2.resize(raw_image, dim, interpolation = cv2.INTER_AREA)
-        cv2.imshow('a', resized)
-        cv2.waitKey(0)
+        #cv2.imshow('a', resized)
+        #cv2.waitKey(0)
 
         gray = cv2.cvtColor(resized,cv2.COLOR_BGR2GRAY)
 
@@ -127,8 +143,8 @@ for fname in images:
         #cv2.waitKey(0)
 
 
-        low_threshold = 75
-        high_threshold = 200
+        low_threshold = 50
+        high_threshold = 175
         edges = cv2.Canny(bilateral_filtered_image, low_threshold, high_threshold)
         #cv2.imshow('a', edges)
         #cv2.waitKey(0)
@@ -141,18 +157,6 @@ for fname in images:
 
         # loop over our contours
         if len(cnts) > 0:
-                for c in cnts:
-                        # approximate the contour
-                        peri = cv2.arcLength(c, True)
-                        approx = cv2.approxPolyDP(c, 0.015 * peri, True)
-                
-                        # if our approximated contour has four points, then
-                        # we can assume that we have found our screen
-                        if len(approx) == 4:
-                                screenCnt = approx
-                                break
-
-                #cv2.drawContours(resized, [screenCnt], -1, (0, 255, 0), 3)
                 copy = resized.copy()
                 cv2.drawContours(copy, cnts, -1, (0,255,0), 3)
                 #cv2.imshow("a", copy)
@@ -211,12 +215,13 @@ for fname in images:
                                 detected = True
                                 #detection['mire'] = mire_number(rect_detected)
                         if detected:
-                                detection['corners'] = original_value(box.tolist())
-                                #detection['center'] = baricenter(rect_detected)
+                                corners = original_value(box.tolist())
+                                detection['corners'] = corners #NOT CHECKED
+                                #detection['center'] = centroid(rect_detected, corners[0] )
                                 detected_list.append(detection)
                         
-                cv2.imshow("a", copy2)
-                cv2.waitKey(0)
+                #cv2.imshow("a", copy2)
+                #cv2.waitKey(0)
                 
                 
         result[fname] = detected_list
