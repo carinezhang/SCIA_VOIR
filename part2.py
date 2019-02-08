@@ -9,8 +9,7 @@ import json
 #from matplotlib import pyplot as plt
 
 
-def corners(rect_detected):
-        pass
+
 def baricenter(rect_detected):
         pass
 def mire_number(rect_detected):
@@ -83,7 +82,7 @@ def feature_matching(img1, img2):
 
 
 
-images = glob.glob('bd_projet_scia/mire/*')
+images = glob.glob('bd_projet_scia/test/*')
 img_mire = cv2.imread('data/mire.png',0)    
 img_damier = cv2.imread('data/damier.png',0)    
 
@@ -178,7 +177,7 @@ for fname in images:
                         box = cv2.boxPoints(rect)
                         box = np.int0(box)
                         cv2.drawContours(copy2,[box],0,(0,0,255),2)
-                        
+
                         rect_detected = getSubImage(rect, resized)
                         #cv2.imshow('a', rect_detected)
                         #cv2.waitKey(0)
@@ -194,12 +193,12 @@ for fname in images:
                                 detected = True
                                 #detection['mire'] = mire_number(rect_detected)
                         if detected:
-                                #detection['corner'] = corners(rect_detected)
+                                detection['corners'] = box.tolist()
                                 #detection['center'] = baricenter(rect_detected)
                                 detected_list.append(detection)
                         
-                #cv2.imshow("a", copy2)
-                #cv2.waitKey(0)
+                cv2.imshow("a", copy2)
+                cv2.waitKey(0)
                 
                 
         result[fname] = detected_list
