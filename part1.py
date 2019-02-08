@@ -47,7 +47,7 @@ def feature_matching(img1, img2):
                 #plt.imshow(img3, 'gray'),plt.show()
 
         else:
-                print( "Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT) )
+                #print( "Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT) )
                 return False
 
 
@@ -83,14 +83,14 @@ for fname in images:
         dim = (width, height)
         # resize image
         resized = cv2.resize(raw_image, dim, interpolation = cv2.INTER_AREA)
-        cv2.imshow('a', resized)
-        cv2.waitKey(0)
+        #cv2.imshow('a', resized)
+        #cv2.waitKey(0)
 
         gray = cv2.cvtColor(resized,cv2.COLOR_BGR2GRAY)
 
         bilateral_filtered_image = cv2.bilateralFilter(gray, 5, 175, 175)
-        cv2.imshow('a', bilateral_filtered_image)
-        cv2.waitKey(0)
+        #cv2.imshow('a', bilateral_filtered_image)
+        #cv2.waitKey(0)
 
 
         if feature_matching(resized, img_damier):

@@ -97,7 +97,7 @@ def feature_matching(img1, img2):
                 #plt.imshow(img3, 'gray'),plt.show()
 
         else:
-                print( "Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT) )
+                #print( "Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT) )
                 return False
 
 
